@@ -1,0 +1,16 @@
+.env
+.env.local
+.DS_Store
+node_modules/
+dist/
+coverage/
+cache/
+out/
+broadcast/
+lib/
+artifacts/
+typechain-types/
+pnpm-lock.yaml
+resources/
+submission/
+talking point.md

@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "foundry-rs.foundry-toolchain",
+    "juanblanco.solidity",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode"
+  ]
+}
+

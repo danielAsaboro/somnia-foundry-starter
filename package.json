@@ -1,0 +1,24 @@
+{
+  "name": "somnia-dev-workspace",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@11.1.1",
+  "scripts": {
+    "check:env": "bash scripts/check-env.sh",
+    "bootstrap:local": "bash scripts/bootstrap.sh",
+    "build:contracts": "forge build",
+    "test:contracts": "forge test -vvv",
+    "deploy:local": "forge script script/DeployCounter.s.sol:DeployCounter --rpc-url http://127.0.0.1:8545 --broadcast",
+    "deploy:testnet": "forge script script/DeployCounter.s.sol:DeployCounter --rpc-url somnia_testnet --broadcast",
+    "deploy:testnet:legacy": "node --env-file=.env scripts/deploy-somnia-live.mjs",
+    "fork:testnet": "bash -lc 'source .env && anvil --fork-url \"$SOMNIA_RPC_TESTNET\"'",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^24.6.1",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "ethers": "^6.16.0"
+  }
+}
