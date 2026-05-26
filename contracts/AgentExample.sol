@@ -89,6 +89,12 @@ contract AgentExample is IAgentRequesterHandler {
     // Your threshold comparisons must use the same scale.
     uint8 public constant DECIMALS = 8;
 
+    // getRequestDeposit() is only the operations-reserve floor.
+    // Without adding the per-agent reward, perAgentBudget = 0 and runners skip
+    // your request — it will time out. Always send floor + pricePerAgent × size.
+    uint256 public constant PER_AGENT_EXECUTION_COST = 0.03 ether;
+    uint256 public constant SUBCOMMITTEE_SIZE = 3;
+
     IAgentRequester public immutable PLATFORM;
 
     uint256 public lastRequestId;
@@ -113,7 +119,7 @@ contract AgentExample is IAgentRequesterHandler {
         payable
         returns (uint256 requestId)
     {
-        uint256 deposit = PLATFORM.getRequestDeposit();
+        uint256 deposit = PLATFORM.getRequestDeposit() + PER_AGENT_EXECUTION_COST * SUBCOMMITTEE_SIZE;
 
         // payload tells the agent which function to call and with what arguments
         bytes memory payload = abi.encodeWithSelector(
@@ -153,7 +159,7 @@ contract AgentExample is IAgentRequesterHandler {
     }
 
     function requiredDeposit() external view returns (uint256) {
-        return PLATFORM.getRequestDeposit();
+        return PLATFORM.getRequestDeposit() + PER_AGENT_EXECUTION_COST * SUBCOMMITTEE_SIZE;
     }
 
     receive() external payable {}
