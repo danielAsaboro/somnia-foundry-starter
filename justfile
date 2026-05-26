@@ -29,3 +29,9 @@ deploy-testnet:
 
 deploy-testnet-legacy:
     node --env-file=.env scripts/deploy-somnia-live.mjs
+
+deploy-agent-example:
+    forge script script/DeployAgentExample.s.sol:DeployAgentExample --rpc-url somnia_testnet --broadcast
+
+request:
+    node --env-file=.env --experimental-strip-types agents/request.ts
